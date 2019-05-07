@@ -45,7 +45,9 @@ class LunchConfiguration {
                 location = döner
         ))
 
-        participationRepository.save(Participation(user = rene, lunch = group1))
-        participationRepository.save(Participation(user = fahed, lunch = group2))
+        val part1 = participationRepository.save(Participation(user = rene, lunch = group1))
+        val part2 = participationRepository.save(Participation(user = fahed, lunch = group2))
+
+        print("")
     }
 }

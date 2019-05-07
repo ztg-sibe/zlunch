@@ -5,7 +5,8 @@ import java.time.LocalDateTime
 
 class Location(
         var name: String,
-        var created: LocalDateTime = LocalDateTime.now()
+        var created: LocalDateTime = LocalDateTime.now(),
+        var updated: LocalDateTime = LocalDateTime.now()
 ) {
     @Id
     var id: String? = null
