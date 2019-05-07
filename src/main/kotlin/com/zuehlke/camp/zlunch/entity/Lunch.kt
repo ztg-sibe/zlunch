@@ -1,0 +1,20 @@
+package com.zuehlke.camp.zlunch.entity
+
+import org.springframework.data.annotation.Id
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+
+@Entity
+class Lunch(
+        var name: String,
+        var startTime: LocalTime,
+        var date: LocalDate,
+        var meetingPoint: String,
+        var location: String,
+        var created: LocalDateTime = LocalDateTime.now(),
+        var updated: LocalDateTime = LocalDateTime.now(),
+        @Id @GeneratedValue var id: Long? = null
+)
