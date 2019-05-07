@@ -7,8 +7,8 @@ import java.time.LocalTime
 
 class Lunch(
         var name: String,
-        var startTime: LocalTime?,
-        var date: LocalDate?,
+        var startTime: LocalTime = LocalTime.of(11, 45),
+        var date: LocalDate = LocalDate.now(),
         var meetingPoint: String?,
         var location: Location,
         var created: LocalDateTime = LocalDateTime.now(),

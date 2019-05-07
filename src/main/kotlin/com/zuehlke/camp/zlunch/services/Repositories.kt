@@ -1,4 +1,4 @@
-package com.zuehlke.camp.zlunch
+package com.zuehlke.camp.zlunch.services
 
 import com.zuehlke.camp.zlunch.entity.Location
 import com.zuehlke.camp.zlunch.entity.Lunch

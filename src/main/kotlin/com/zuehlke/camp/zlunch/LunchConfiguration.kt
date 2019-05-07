@@ -4,11 +4,13 @@ import com.zuehlke.camp.zlunch.entity.Location
 import com.zuehlke.camp.zlunch.entity.Lunch
 import com.zuehlke.camp.zlunch.entity.Participation
 import com.zuehlke.camp.zlunch.entity.User
+import com.zuehlke.camp.zlunch.services.LocationRepository
+import com.zuehlke.camp.zlunch.services.LunchRepository
+import com.zuehlke.camp.zlunch.services.ParticipationRepository
+import com.zuehlke.camp.zlunch.services.UserRepository
 import org.springframework.boot.ApplicationRunner
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import java.time.LocalDate
-import java.time.LocalTime
 
 @Configuration
 class LunchConfiguration {
@@ -25,26 +27,28 @@ class LunchConfiguration {
         lunchRepository.deleteAll()
 
 
-        val rene = userRepository.save(User(
-                name = "Rene",
-                id = 0)
-        )
+        val rene = userRepository.save(User(name = "Rene", id = 0))
+        val fahed = userRepository.save(User(name = "Fahed", id = 1))
 
-        val creos = locationRepository.save(Location(
-                name = "Creos",
-                id = 0
-        ));
+        val creos = locationRepository.save(Location(name = "Creos", id = 0));
+        val döner = locationRepository.save(Location(name = "Sultan", id = 1));
 
-        val lunch = lunchRepository.save(Lunch(
+        val group1 = lunchRepository.save(Lunch(
                 name = "Pasta Donnertag",
-                startTime = LocalTime.of(11, 45),
-                date = LocalDate.now(),
                 meetingPoint = "Fahrstuhl",
                 location = creos,
                 id = 0
         ))
 
-        participationRepository.save(Participation(user = rene, lunch = lunch, id = 0))
+        val group2 = lunchRepository.save(Lunch(
+                name = "Dönerstag",
+                meetingPoint = "Fahrstuhl",
+                location = döner,
+                id = 1
+        ))
+
+        participationRepository.save(Participation(user = rene, lunch = group1, id = 0))
+        participationRepository.save(Participation(user = fahed, lunch = group2, id = 1))
 
     }
 }
