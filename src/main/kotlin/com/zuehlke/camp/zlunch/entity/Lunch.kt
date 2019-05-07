@@ -7,11 +7,11 @@ import java.time.LocalTime
 
 class Lunch(
         var name: String,
-        var startTime: LocalTime,
-        var date: LocalDate,
-        var meetingPoint: String,
-        var location: String,
+        var startTime: LocalTime?,
+        var date: LocalDate?,
+        var meetingPoint: String?,
+        var location: String?,
         var created: LocalDateTime = LocalDateTime.now(),
         var updated: LocalDateTime = LocalDateTime.now(),
-        @Id var id: Long? = null
+        @Id var id: Long
 )
