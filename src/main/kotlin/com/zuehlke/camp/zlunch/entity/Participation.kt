@@ -5,8 +5,8 @@ import org.springframework.data.mongodb.core.mapping.DBRef
 import java.time.LocalDateTime
 
 class Participation(
-        @DBRef var user: User,
-        var lunch: Lunch,
+        var user: User,
+        @DBRef var lunch: Lunch,
         var note: String? = null,
         var created: LocalDateTime = LocalDateTime.now(),
         var updated: LocalDateTime = LocalDateTime.now()
