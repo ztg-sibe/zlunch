@@ -12,6 +12,8 @@ class Lunch(
         var meetingPoint: String?,
         var location: Location,
         var created: LocalDateTime = LocalDateTime.now(),
-        var updated: LocalDateTime = LocalDateTime.now(),
-        @Id var id: Long
-)
+        var updated: LocalDateTime = LocalDateTime.now()
+) {
+    @Id
+    var id: String? = null
+}

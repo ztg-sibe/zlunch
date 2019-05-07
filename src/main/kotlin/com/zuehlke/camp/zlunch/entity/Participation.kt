@@ -5,6 +5,8 @@ import org.springframework.data.annotation.Id
 class Participation(
         var user: User,
         var lunch: Lunch,
-        var note: String? = null,
-        @Id var id: Long
-)
+        var note: String? = null
+) {
+    @Id
+    var id: String? = null
+}

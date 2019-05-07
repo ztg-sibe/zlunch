@@ -27,28 +27,25 @@ class LunchConfiguration {
         lunchRepository.deleteAll()
 
 
-        val rene = userRepository.save(User(name = "Rene", id = 0))
-        val fahed = userRepository.save(User(name = "Fahed", id = 1))
+        val rene = userRepository.save(User(name = "Rene"))
+        val fahed = userRepository.save(User(name = "Fahed"))
 
-        val creos = locationRepository.save(Location(name = "Creos", id = 0));
-        val döner = locationRepository.save(Location(name = "Sultan", id = 1));
+        val creos = locationRepository.save(Location(name = "Creos"))
+        val döner = locationRepository.save(Location(name = "Sultan"))
 
         val group1 = lunchRepository.save(Lunch(
                 name = "Pasta Donnertag",
                 meetingPoint = "Fahrstuhl",
-                location = creos,
-                id = 0
+                location = creos
         ))
 
         val group2 = lunchRepository.save(Lunch(
                 name = "Dönerstag",
                 meetingPoint = "Fahrstuhl",
-                location = döner,
-                id = 1
+                location = döner
         ))
 
-        participationRepository.save(Participation(user = rene, lunch = group1, id = 0))
-        participationRepository.save(Participation(user = fahed, lunch = group2, id = 1))
-
+        participationRepository.save(Participation(user = rene, lunch = group1))
+        participationRepository.save(Participation(user = fahed, lunch = group2))
     }
 }
