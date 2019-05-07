@@ -1,5 +1,31 @@
 {{> header}}
 
-<h1>{{title}}</h1>
+<h1>Are you hungry?</h1>
+
+<h2>Existing Groups</h2>
+
+<table>
+    <tr>
+        <th>Wann?</th>
+        <th>Wo?</th>
+        <th>Wohin?</th>
+    </tr>
+
+    {{#lunches}}
+
+    <tr>
+        <td>{{startTime}}</td>
+        <td>{{meetingPoint}}</td>
+        <td>{{location.name}}</td>
+    </tr>
+
+    {{/lunches}}
+</table>
+
+
+<h2>Create Lunch group</h2>
+<form>
+
+</form>
 
 {{> footer}}
