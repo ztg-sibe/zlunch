@@ -10,7 +10,7 @@ class Lunch(
         var startTime: LocalTime?,
         var date: LocalDate?,
         var meetingPoint: String?,
-        var location: String?,
+        var location: Location,
         var created: LocalDateTime = LocalDateTime.now(),
         var updated: LocalDateTime = LocalDateTime.now(),
         @Id var id: Long
