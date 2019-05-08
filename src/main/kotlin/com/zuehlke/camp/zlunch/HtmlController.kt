@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping
 @Controller
 class HtmlController(val lunchRepository: LunchRepository) {
 
-    @GetMapping("/")
-    fun start(model: Model): String {
-        model["title"] = "Hello World"
-        model["lunches"] = lunchRepository.findAll()
-        return "start"
-    }
+//    @GetMapping("/")
+//    fun start(model: Model): String {
+//        model["title"] = "Hello World"
+//        model["lunches"] = lunchRepository.findAll()
+//        return "start"
+//    }
 
 }
