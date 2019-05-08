@@ -5,10 +5,12 @@ import com.zuehlke.camp.zlunch.entity.Lunch
 import com.zuehlke.camp.zlunch.entity.Participation
 import com.zuehlke.camp.zlunch.entity.User
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository
+import org.springframework.data.mongodb.repository.Tailable
+import reactor.core.publisher.Flux
 import java.time.LocalDate
 
 interface LunchRepository : ReactiveMongoRepository<Lunch, String> {
-    fun findAllByDate(date: LocalDate): Lunch?
+    fun streamAllBy(): Flux<Lunch>
 }
 
 interface LocationRepository : ReactiveMongoRepository<Location, String>

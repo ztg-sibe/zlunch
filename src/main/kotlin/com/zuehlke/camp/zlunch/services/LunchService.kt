@@ -9,4 +9,8 @@ class LunchService(val lunchRepository: LunchRepository) {
     fun findAll(): Flux<Lunch> {
         return lunchRepository.findAll()
     }
+
+    fun steamAll(): Flux<Lunch> {
+        return lunchRepository.streamAllBy()
+    }
 }
