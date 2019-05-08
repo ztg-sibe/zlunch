@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link data-th-href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <!--<link data-th-href="@{/css/main.css}" rel="stylesheet">-->
+</head>
+<body>
+
+<div class="container">
+
+    <div class="row">
+        <div id="title">
+            <h1>ZLunch</h1>
+        </div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Location</th>
+                <th>Time</th>
+                <th>Meeting point</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="result" data-th-each="lunch : ${lunches}">
+                <td>[[${lunch.location.name}]]</td>
+                <td>[[${lunch.startTime}]]</td>
+                <td>[[${lunch.meetingPoint}]]</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row">
+        <form action="/lunches" method="post">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input class="form-control" id="name" placeholder="Name">
+            </div>
+            <div class="form-group">
+                <label for="time">Name</label>
+                <input class="form-control" id="time" placeholder="Time">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Create new lunch</button>
+        </form>
+    </div>
+</div>
