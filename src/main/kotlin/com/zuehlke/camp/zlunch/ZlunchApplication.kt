@@ -8,16 +8,16 @@ import org.springframework.context.annotation.Bean
 import org.springframework.web.reactive.function.server.body
 import org.springframework.web.reactive.function.server.router
 
-@SpringBootApplication
-class ZlunchApplication
-
-@Bean
-fun route(lunchService: LunchService) = router {
-    GET("/lunches") { ok().body(lunchService.findAll()) }
-}
-
 fun main(args: Array<String>) {
     runApplication<ZlunchApplication>(*args) {
         setBannerMode(Banner.Mode.OFF)
+    }
+}
+
+@SpringBootApplication
+class ZlunchApplication {
+    @Bean
+    fun routes(lunchService: LunchService) = router {
+        GET("/lunches") { ok().body(lunchService.findAll()) }
     }
 }
