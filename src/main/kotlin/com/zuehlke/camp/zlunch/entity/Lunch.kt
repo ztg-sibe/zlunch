@@ -1,6 +1,7 @@
 package com.zuehlke.camp.zlunch.entity
 
 import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.mapping.DBRef
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime

@@ -3,15 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <script src="/js/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+    <link data-th-href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <!--<link data-th-href="@{/css/main.css}" rel="stylesheet">-->
 </head>
 <body>
 
-<div class="container" id="app">
-    {{locat}}
-    {{error}}
+<div class="container">
 
     <div class="row">
         <div id="title">
@@ -28,13 +25,18 @@
             </tr>
             </thead>
             <tbody>
-            <tr class="result" data-th-each="lunch : ${lunches}">
-                <td>[[${lunch.location.name}]]</td>
-                <td>[[${lunch.startTime}]]</td>
-                <td>[[${lunch.meetingPoint}]]</td>
+            <tr class="result" data-th-each="lunchWithParticipations : ${lunches}">
+                <td>[[${lunchWithParticipations.lunch.name}]]</td>
+                <td>[[${lunchWithParticipations.lunch.startTime}]]</td>
+                <td>[[${lunchWithParticipations.lunch.meetingPoint}]]</td>
+                <td>
+                    <span th:each="item : ${lunchWithParticipations.participations}">
+                        <span>[[${item.size()}]]</span>
+                    </span>
+                </td>
                 <td>
                     <form action="/participate" method="post">
-                        <input type="hidden" name="lunchId" th:value="${lunch.id}">
+                        <input type="hidden" name="lunchId" th:value="${lunchWithParticipations.lunch.id}">
                         <div class="form-group">
                             <label for="users">Select user</label>
                             <select class="form-control" name="userId" id="users">
@@ -80,7 +82,3 @@
         </form>
     </div>
 </div>
-
-<script src="/js/index.js"></script>
-</body>
-</html>

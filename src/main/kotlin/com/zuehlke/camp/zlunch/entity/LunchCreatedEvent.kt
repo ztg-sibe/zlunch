@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef
 import java.time.LocalDateTime
 
 class LunchCreatedEvent(
-        @DBRef var lunch: Lunch,
+        var lunch: Lunch,
         var created: LocalDateTime = LocalDateTime.now(),
         var updated: LocalDateTime = LocalDateTime.now()
 ) {

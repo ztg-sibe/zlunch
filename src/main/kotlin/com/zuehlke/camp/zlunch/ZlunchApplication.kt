@@ -18,6 +18,6 @@ fun main(args: Array<String>) {
 class ZlunchApplication {
     @Bean
     fun routes(lunchService: LunchService) = router {
-        GET("/lunches") { ok().bodyToServerSentEvents(lunchService.findAll()) }
+        GET("/lunchEvents") { ok().bodyToServerSentEvents(lunchService.steamAll()) }
     }
 }
