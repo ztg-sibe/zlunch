@@ -32,7 +32,7 @@ class LunchConfiguration {
                             meetingPoint = "Fahrstuhl",
                             location = cleos
                     )).zipWith(userRepository.save(User(name = "Rene"))) { cleosGroup, rene ->
-                        participationRepository.save(Participation(user = rene, lunch = cleosGroup)).block()
+                        participationRepository.save(Participation(user = rene, lunch = cleosGroup)).subscribe()
                     }
                 }
                 .then(locationRepository.save(Location(name = "Sultan")))
@@ -42,7 +42,7 @@ class LunchConfiguration {
                             meetingPoint = "Fahrstuhl",
                             location = döner
                     )).zipWith(userRepository.save(User(name = "Fahed"))) { dönerGroup, fahed ->
-                        participationRepository.save(Participation(user = fahed, lunch = dönerGroup)).block()
+                        participationRepository.save(Participation(user = fahed, lunch = dönerGroup)).subscribe()
                     }
                 }
                 .then()
