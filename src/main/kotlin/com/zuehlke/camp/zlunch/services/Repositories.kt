@@ -1,14 +1,15 @@
 package com.zuehlke.camp.zlunch.services
 
-import com.zuehlke.camp.zlunch.entity.Location
-import com.zuehlke.camp.zlunch.entity.Lunch
-import com.zuehlke.camp.zlunch.entity.Participation
-import com.zuehlke.camp.zlunch.entity.User
+import com.zuehlke.camp.zlunch.entity.*
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository
+import org.springframework.data.mongodb.repository.Tailable
 import reactor.core.publisher.Flux
 
-interface LunchRepository : ReactiveMongoRepository<Lunch, String> {
-    fun streamAllBy(): Flux<Lunch>
+interface LunchRepository : ReactiveMongoRepository<Lunch, String>
+
+interface LunchCreatedEventRepository: ReactiveMongoRepository<LunchCreatedEvent, String> {
+    @Tailable
+    fun streamAllBy(): Flux<LunchCreatedEvent>
 
 }
 

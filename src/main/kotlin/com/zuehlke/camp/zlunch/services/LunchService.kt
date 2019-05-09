@@ -1,6 +1,7 @@
 package com.zuehlke.camp.zlunch.services
 
 import com.zuehlke.camp.zlunch.entity.Lunch
+import com.zuehlke.camp.zlunch.entity.LunchCreatedEvent
 import com.zuehlke.camp.zlunch.entity.Participation
 import com.zuehlke.camp.zlunch.entity.User
 import org.springframework.data.domain.Sort
@@ -10,13 +11,15 @@ import reactor.core.publisher.Mono
 
 @Service
 class LunchService(val lunchRepository: LunchRepository,
-                   val participationRepository: ParticipationRepository) {
+                   val participationRepository: ParticipationRepository,
+                   val lunchCreatedEventRepository: LunchCreatedEventRepository) {
     fun findAll(): Flux<Lunch> {
         return lunchRepository.findAll(Sort.by("startTime").ascending())
     }
 
     fun createLunch(lunch: Lunch): Mono<Lunch> {
         return lunchRepository.save(lunch)
+                .doOnNext { l -> lunchCreatedEventRepository.save(LunchCreatedEvent(l)).subscribe { print("yay")} }
                 .log()
     }
 
@@ -27,7 +30,7 @@ class LunchService(val lunchRepository: LunchRepository,
                 .log()
     }
 
-    fun steamAll(): Flux<Lunch> {
-        return lunchRepository.streamAllBy()
+    fun steamAll(): Flux<LunchCreatedEvent> {
+        return lunchCreatedEventRepository.streamAllBy()
     }
 }

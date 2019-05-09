@@ -24,7 +24,7 @@ class HtmlController(val lunchRepository: LunchRepository,
 
     @GetMapping("/")
     fun start(model: Model): String {
-        model["lunches"] = ReactiveDataDriverContextVariable(lunchRepository.streamAllBy(), 1);
+        model["lunches"] = ReactiveDataDriverContextVariable(lunchRepository.findAll(), 1);
         model["locations"] = locationRepository.findAll()
         model["users"] = userRepository.findAll()
         model["lunch"] = LunchForm()
