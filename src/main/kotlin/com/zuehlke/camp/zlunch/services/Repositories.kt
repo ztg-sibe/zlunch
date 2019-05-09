@@ -14,8 +14,7 @@ interface LunchRepository : ReactiveMongoRepository<Lunch, String> {
 
 interface LunchCreatedEventRepository: ReactiveMongoRepository<LunchCreatedEvent, String> {
     @Tailable
-    fun streamAllByCreatedIsAfterOrderByCreated(date: LocalDateTime): Flux<LunchCreatedEvent>
-
+    fun streamAllByCreatedIsAfter(date: LocalDateTime): Flux<LunchCreatedEvent>
 }
 
 interface LocationRepository : ReactiveMongoRepository<Location, String>

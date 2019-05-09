@@ -21,7 +21,7 @@ class LunchService(val lunchRepository: LunchRepository,
 
     fun createLunch(lunch: Lunch): Mono<Lunch> {
         return lunchRepository.save(lunch)
-                .doOnNext { l -> lunchCreatedEventRepository.save(LunchCreatedEvent(l)).subscribe { print("yay")} }
+                .doOnNext { l -> lunchCreatedEventRepository.save(LunchCreatedEvent(l)).subscribe { print("yay") } }
                 .log()
     }
 
@@ -32,11 +32,11 @@ class LunchService(val lunchRepository: LunchRepository,
                 .log()
     }
 
-    fun steamAll(since: LocalDateTime): Flux<LunchCreatedEvent> {
-        return lunchCreatedEventRepository.streamAllByCreatedIsAfterOrderByCreated(since)
+    fun steamAll(): Flux<LunchCreatedEvent> {
+        return lunchCreatedEventRepository.streamAllByCreatedIsAfter(LocalDateTime.now())
     }
 
     fun getParticipationByLunch(id: String): Flux<Participation> {
-        return participationRepository.findAllByLunchId(id);
+        return participationRepository.findAllByLunchId(id)
     }
 }

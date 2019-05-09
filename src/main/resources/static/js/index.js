@@ -1,4 +1,4 @@
-var eventUrl = "http://localhost:8080/lunches";
+var eventUrl = "http://localhost:8080/lunchEvents";
 new Vue({
     el: '#app',
     data: {
@@ -13,13 +13,11 @@ new Vue({
             this.loadData();
         },
         loadData: function () {
-            // this.$http.get(eventUrl).then(function (response) {
-            //     if (!!response.body) {
-            //         this.locat = response.body;
-            //     }
-            // }, function (response) {
-            //     this.error = response;
-            // });
+            var es = new EventSource(eventUrl);
+            es.addEventListener('message', function (event) {
+                var data = JSON.parse(event.data);
+                console.log(data.lunch.name);
+            }, false);
         }
     }
 });
