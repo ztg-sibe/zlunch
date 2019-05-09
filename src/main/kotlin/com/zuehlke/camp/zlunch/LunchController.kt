@@ -1,5 +1,6 @@
 package com.zuehlke.camp.zlunch
 
+import com.zuehlke.camp.zlunch.entity.Lunch
 import com.zuehlke.camp.zlunch.entity.Participation
 import com.zuehlke.camp.zlunch.services.LunchService
 import org.springframework.web.bind.annotation.GetMapping
@@ -14,6 +15,11 @@ class LunchController(val lunchService: LunchService) {
     @GetMapping("/lunches/{id}/participations")
     fun getParticipations(@PathVariable("id") id: String): Flux<Participation> {
         return lunchService.getParticipationByLunch(id);
+    }
+
+    @GetMapping("/lunches")
+    fun getLunches(): Flux<Lunch> {
+        return lunchService.findAll();
     }
 
 //    @PostMapping("/lunches")

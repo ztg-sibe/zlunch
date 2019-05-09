@@ -8,13 +8,15 @@ import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
+import java.time.LocalDate
+import java.time.LocalDateTime
 
 @Service
 class LunchService(val lunchRepository: LunchRepository,
                    val participationRepository: ParticipationRepository,
                    val lunchCreatedEventRepository: LunchCreatedEventRepository) {
     fun findAll(): Flux<Lunch> {
-        return lunchRepository.findAll(Sort.by("startTime").ascending().and(Sort.by("name").ascending()))
+        return lunchRepository.findAllByDateIs(LocalDate.now(), Sort.by("startTime").ascending().and(Sort.by("name").ascending()))
     }
 
     fun createLunch(lunch: Lunch): Mono<Lunch> {
@@ -30,8 +32,8 @@ class LunchService(val lunchRepository: LunchRepository,
                 .log()
     }
 
-    fun steamAll(): Flux<LunchCreatedEvent> {
-        return lunchCreatedEventRepository.streamAllBy()
+    fun steamAll(since: LocalDateTime): Flux<LunchCreatedEvent> {
+        return lunchCreatedEventRepository.streamAllByCreatedIsAfterOrderByCreated(since)
     }
 
     fun getParticipationByLunch(id: String): Flux<Participation> {
