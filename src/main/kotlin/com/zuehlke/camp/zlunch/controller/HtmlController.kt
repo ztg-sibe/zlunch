@@ -32,6 +32,7 @@ class HtmlController(val lunchRepository: LunchRepository,
     }
 
     data class LunchForm(val name: String = "", val meetingPoint: String = "", val locationId: String = "")
+    data class SubscriptionForm(val lunchId: String = "", val userId: String = "")
 
     @PostMapping("/")
     fun post(lunch: LunchForm): Mono<RedirectView> {
@@ -43,5 +44,13 @@ class HtmlController(val lunchRepository: LunchRepository,
                             location = location)
                 }
                 .flatMap(lunchService::createLunch).flatMap { Mono.just(RedirectView("/")) }
+    }
+
+    @PostMapping("/participate")
+    fun subscribe(subscriptionForm: SubscriptionForm): Mono<RedirectView> {
+        return lunchService.participateLunch(
+                userRepository.findById(subscriptionForm.userId),
+                lunchRepository.findById(subscriptionForm.lunchId))
+                .flatMap { Mono.just(RedirectView("/")) }
     }
 }

@@ -20,6 +20,7 @@
                 <th>Location</th>
                 <th>Time</th>
                 <th>Meeting point</th>
+                <th>Subscribe</th>
             </tr>
             </thead>
             <tbody>
@@ -27,6 +28,21 @@
                 <td>[[${lunch.location.name}]]</td>
                 <td>[[${lunch.startTime}]]</td>
                 <td>[[${lunch.meetingPoint}]]</td>
+                <td>
+                    <form action="/participate" method="post">
+                        <input type="hidden" name="lunchId" th:value="${lunch.id}">
+                        <div class="form-group">
+                            <label for="users">Select user</label>
+                            <select class="form-control" name="userId" id="users">
+                                <option data-th-each="user : ${users}"
+                                        th:value="${user.id}"
+                                        th:text="${user.name}">
+                                </option>
+                            </select>
+                        </div>
+                        <button type="submit">+</button>
+                    </form>
+                </td>
             </tr>
             </tbody>
         </table>
