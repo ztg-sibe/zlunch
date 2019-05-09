@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,15 +33,28 @@
     </div>
 
     <div class="row">
-        <form action="/lunches" method="post">
+        <form action="#" th:action="@{/}" th:object="${lunch}" method="post">
             <div class="form-group">
                 <label for="name">Name</label>
-                <input class="form-control" id="name" placeholder="Name">
+                <input class="form-control" id="name" th:field="*{name}" placeholder="Name" value="Created1">
+            </div>
+            <!--<div class="form-group">-->
+            <!--<label for="time">Time</label>-->
+            <!--<input class="form-control" id="time" name="time" placeholder="Time" >-->
+            <!--</div>-->
+            <div class="form-group">
+                <label for="meetingPoint">Meeting Point</label>
+                <input class="form-control" id="meetingPoint" th:field="*{meetingPoint}" placeholder="Meeting Point"
+                       value="Aufzug">
             </div>
             <div class="form-group">
-                <label for="time">Name</label>
-                <input class="form-control" id="time" placeholder="Time">
+                <label for="locations">Select location</label>
+                <select class="form-control" th:field="*{locationId}" id="locations">
+                    <option data-th-each="loc : ${locations}" th:value="${loc.id}" th:text="${loc.name}">
+                    </option>
+                </select>
             </div>
+
 
             <button type="submit" class="btn btn-primary">Create new lunch</button>
         </form>

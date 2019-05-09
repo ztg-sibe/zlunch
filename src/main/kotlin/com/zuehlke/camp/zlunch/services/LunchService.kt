@@ -15,13 +15,12 @@ class LunchService(val lunchRepository: LunchRepository,
         return lunchRepository.findAll(Sort.by("startTime").ascending())
     }
 
-    fun createLunch(lunch: Mono<Lunch>): Mono<Lunch> {
-        return lunch
-                .flatMap { s -> lunchRepository.save(s) }
+    fun createLunch(lunch: Lunch): Mono<Lunch> {
+        return lunchRepository.save(lunch)
                 .log()
     }
 
-    fun participateLunch(user: Mono<User>, lunch:Mono<Lunch>) : Mono<Participation>{
+    fun participateLunch(user: Mono<User>, lunch: Mono<Lunch>): Mono<Participation> {
         return user
                 .zipWith(lunch) { u, l -> Participation(u, l) }
                 .flatMap { s -> participationRepository.save(s) }

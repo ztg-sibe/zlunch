@@ -11,8 +11,8 @@ import reactor.core.publisher.Mono
 class LunchController(val lunchService: LunchService) {
 
 
-    @PostMapping("/lunches")
-    fun createLunch(@RequestBody lunch: Mono<Lunch>): Mono<Lunch> {
-        return lunchService.createLunch(lunch);
-    }
+//    @PostMapping("/lunches")
+//    fun createLunch(@RequestBody lunch: Mono<Lunch>): Mono<Lunch> {
+//        return lunchService.createLunch(lunch);
+//    }
 }
