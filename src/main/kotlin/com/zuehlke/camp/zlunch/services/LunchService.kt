@@ -14,7 +14,7 @@ class LunchService(val lunchRepository: LunchRepository,
                    val participationRepository: ParticipationRepository,
                    val lunchCreatedEventRepository: LunchCreatedEventRepository) {
     fun findAll(): Flux<Lunch> {
-        return lunchRepository.findAll(Sort.by("startTime").ascending())
+        return lunchRepository.findAll(Sort.by("startTime").ascending().and(Sort.by("name").ascending()))
     }
 
     fun createLunch(lunch: Lunch): Mono<Lunch> {
@@ -32,5 +32,9 @@ class LunchService(val lunchRepository: LunchRepository,
 
     fun steamAll(): Flux<LunchCreatedEvent> {
         return lunchCreatedEventRepository.streamAllBy()
+    }
+
+    fun getParticipationByLunch(id: String): Flux<Participation> {
+        return participationRepository.findAllByLunchId(id);
     }
 }
