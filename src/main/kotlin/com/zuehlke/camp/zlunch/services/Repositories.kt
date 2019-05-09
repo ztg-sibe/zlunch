@@ -17,4 +17,6 @@ interface LocationRepository : ReactiveMongoRepository<Location, String>
 
 interface UserRepository : ReactiveMongoRepository<User, String>
 
-interface ParticipationRepository : ReactiveMongoRepository<Participation, String>
+interface ParticipationRepository : ReactiveMongoRepository<Participation, String> {
+    fun findAllByLunchId(id: String): Flux<Participation>
+}
