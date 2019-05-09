@@ -11,6 +11,7 @@ import com.zuehlke.camp.zlunch.services.UserRepository
 import org.springframework.boot.ApplicationRunner
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import java.time.LocalDate
 
 @Configuration
 class LunchConfiguration {
@@ -40,10 +41,18 @@ class LunchConfiguration {
                     lunchRepository.save(Lunch(
                             name = "Dönerstag",
                             meetingPoint = "Fahrstuhl",
+                            location = döner,
+                            date = LocalDate.now().minusDays(7)
+                    )).then(lunchRepository.save(Lunch(
+                            name = "Dönerstag",
+                            meetingPoint = "Fahrstuhl",
                             location = döner
-                    )).zipWith(userRepository.save(User(name = "Fahed"))) { dönerGroup, fahed ->
+                    )))
+                    .zipWith(userRepository.save(User(name = "Fahed"))) { dönerGroup, fahed ->
                         participationRepository.save(Participation(user = fahed, lunch = dönerGroup)).subscribe()
                     }
+
+
                 }
                 .then()
                 .log()

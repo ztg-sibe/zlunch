@@ -1,15 +1,20 @@
 package com.zuehlke.camp.zlunch.services
 
 import com.zuehlke.camp.zlunch.entity.*
+import org.springframework.data.domain.Sort
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository
 import org.springframework.data.mongodb.repository.Tailable
 import reactor.core.publisher.Flux
+import java.time.LocalDate
+import java.time.LocalDateTime
 
-interface LunchRepository : ReactiveMongoRepository<Lunch, String>
+interface LunchRepository : ReactiveMongoRepository<Lunch, String> {
+    fun findAllByDateIs(date: LocalDate, sort: Sort) : Flux<Lunch>
+}
 
 interface LunchCreatedEventRepository: ReactiveMongoRepository<LunchCreatedEvent, String> {
     @Tailable
-    fun streamAllBy(): Flux<LunchCreatedEvent>
+    fun streamAllByCreatedIsAfterOrderByCreated(date: LocalDateTime): Flux<LunchCreatedEvent>
 
 }
 
