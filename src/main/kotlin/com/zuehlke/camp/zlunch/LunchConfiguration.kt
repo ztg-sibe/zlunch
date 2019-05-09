@@ -21,33 +21,31 @@ class LunchConfiguration {
                             userRepository: UserRepository,
                             participationRepository: ParticipationRepository) = ApplicationRunner {
 
-//        userRepository.deleteAll()
-//        participationRepository.deleteAll()
-//        locationRepository.deleteAll()
-//        lunchRepository.deleteAll()
-//
-//
-//        val rene = userRepository.save(User(name = "Rene"))
-//        val fahed = userRepository.save(User(name = "Fahed"))
-//
-//        val creos = locationRepository.save(Location(name = "Creos"))
-//        val döner = locationRepository.save(Location(name = "Sultan"))
-//
-//        val group1 = lunchRepository.save(Lunch(
-//                name = "Pasta Donnertag",
-//                meetingPoint = "Fahrstuhl",
-//                location = creos
-//        ))
-//
-//        val group2 = lunchRepository.save(Lunch(
-//                name = "Dönerstag",
-//                meetingPoint = "Fahrstuhl",
-//                location = döner
-//        ))
-//
-//        val part1 = participationRepository.save(Participation(user = rene, lunch = group1))
-//        val part2 = participationRepository.save(Participation(user = fahed, lunch = group2))
-//
-//        print("")
+        userRepository.deleteAll()
+                .then(participationRepository.deleteAll())
+                .then(locationRepository.deleteAll())
+                .then(lunchRepository.deleteAll())
+                .then(locationRepository.save(Location(name = "Cleos")))
+                .flatMap { cleos ->
+                    lunchRepository.save(Lunch(
+                            name = "Pasta Donnertag",
+                            meetingPoint = "Fahrstuhl",
+                            location = cleos
+                    )).zipWith(userRepository.save(User(name = "Rene"))) { cleosGroup, rene ->
+                        participationRepository.save(Participation(user = rene, lunch = cleosGroup))
+                    }
+                }
+                .then(locationRepository.save(Location(name = "Sultan")))
+                .flatMap { döner ->
+                    lunchRepository.save(Lunch(
+                            name = "Dönerstag",
+                            meetingPoint = "Fahrstuhl",
+                            location = döner
+                    )).zipWith(userRepository.save(User(name = "Fahed"))) { dönerGroup, fahed ->
+                        participationRepository.save(Participation(user = fahed, lunch = dönerGroup))
+                    }
+                }
+                .log()
+                .block()
     }
 }
