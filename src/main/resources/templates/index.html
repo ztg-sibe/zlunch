@@ -37,7 +37,7 @@
                 <td>[[${lunch.location.name}]]</td>
                 <td>[[${lunch.startTime}]]</td>
                 <td>[[${lunch.meetingPoint}]]</td>
-                <td>...</td>
+                <td><lunch-participation-list data-th-lunch="${lunch.id}"></lunch-participation-list></td>
                 <td>
                     <form action="/participate" method="post">
                         <input type="hidden" name="lunchId" th:value="${lunch.id}">
